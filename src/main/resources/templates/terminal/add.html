@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	layout:decorator="layout/layout">
+
+<head>
+<title>Layout</title>
+<style type="text/css">
+	.label label-danger{
+	color:red;
+	}
+</style>
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+<div class="card card-register mx-auto mt-5">
+      <div class="card-header">Add New Terminal</div>
+      <div class="card-body">
+		<form th:action="@{/terminal/add}" class="horizontal"
+			th:object="${terminal}" method="post">
+			<input type="hidden" name="id" th:value="${configId}" />
+			<div class="form-group">
+				<label for="terminal_id">Terminal ID</label> <input type="text"
+					th:field="*{terminalId}" id="terminal_id" class="form-control">
+				<p th:if="${#fields.hasErrors('terminalId')}"
+					class="label label-danger" th:errors="*{terminalId}">Terminal
+					Id Error</p>
+			</div>
+			<div class="form-group">
+				<label for="serial_no">Serial Number</label> <input type="text"
+					th:field="*{serialNo}" id="serial_no" class="form-control">
+				<p th:if="${#fields.hasErrors('serialNo')}"
+					class="label label-danger" th:errors="*{serialNo}">Serial No
+					Error</p>
+			</div>
+			<div class="form-group">
+				<label for="merchant_no">Merchant No</label> <input type="text"
+					th:field="*{merchantNo}" id="merchant_no" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="merchant_type">Merchant Type</label> <input type="text"
+					th:field="*{merchantType}" id="merchant_type" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="merchant_name">Merchant Name</label> <input type="text"
+					th:field="*{merchantName}" id="merchant_name" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="merchant_phone">Merchant Phone</label> <input
+					type="text" th:field="*{merchantPhone}" id="merchant_phone"
+					class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="terminal_id">Merchant Address</label>
+				<textarea name="merchant_address" th:field="*{merchantAddress}"
+					class="form-control"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="terminal_owner">Terminal Owner</label> <input
+					type="text" th:field="*{terminalOwner}" id="terminal_owner"
+					class="form-control">
+			</div>
+
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+
+		<!-- 	<div class="pull-left"> -->
+				<div class="col-md-6">
+					<input type="submit" class="btn  btn-primary" value="Submit" />
+					<input type="reset" class="btn btn-primary" value="Reset" />
+				</div>
+			
+		<!-- 	</div> -->
+			<!--<button class="btn btn-lg btn-primary btn-block" type="submit">Add terminal</button>-->
+		</form>
+	</div>
+	</div>
+	</div>
+
+</body>
+</html>

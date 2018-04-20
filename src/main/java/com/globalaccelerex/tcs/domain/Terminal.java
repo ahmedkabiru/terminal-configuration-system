@@ -1,26 +1,31 @@
 package com.globalaccelerex.tcs.domain;
 
+import com.globalaccelerex.tcs.validation.checkUniqueSerialNo;
+import com.globalaccelerex.tcs.validation.checkUniqueTerminalId;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Configuration {
+@Table(name = "terminals")
+public class Terminal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "configId",nullable = false)
     private Long configId;
 
+    //@checkUniqueSerialNo
+    @NotBlank(message = "Serial No cannot be null")
     @Column(name = "serialNo",nullable = false,unique = true)
     private String serialNo;
 
@@ -28,34 +33,42 @@ public class Configuration {
 
     private String merchantName;
 
+    //@Max(value = 50,message = "Merchant Address cannot be more than 50 character")
     private String merchantAddress;
 
     private String merchantPhone;
 
     private String merchantType;
 
+    //@checkUniqueTerminalId
+    @NotBlank(message = "Terminal Id cannot be null")
+   // @Max(value = 8,message = "Terminal id cannot be more than 8 character")
+    @Column(name = "terminalId",nullable = false,unique = true)
     private String terminalId;
 
     private String terminalOwner;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private User user;
 
-    @CreatedBy
-    @Column(nullable = false, updatable = false)
-    private String createdBy;
+    private Long userId;
+
+//    @CreatedBy
+//    @Column(nullable = false, updatable = false)
+//    private String createdBy;
 
     @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    @Column
     private LocalDateTime created;
 
-    @LastModifiedBy
-    @Column(nullable = false)
-    private String modifiedBy;
+//    @LastModifiedBy
+//    @Column(nullable = false)
+//    private String modifiedBy;
 
     @LastModifiedDate
-    @Column(nullable = false)
+    @CreationTimestamp
+    @Column
     private LocalDateTime modified;
+
 
     public Long getConfigId() {
         return configId;
@@ -129,12 +142,44 @@ public class Configuration {
         this.terminalOwner = terminalOwner;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
+//    public String getCreatedBy() {
+//        return createdBy;
+//    }
+//
+//    public void setCreatedBy(String createdBy) {
+//        this.createdBy = createdBy;
+//    }
+//
+//    public LocalDateTime getCreated() {
+//        return created;
+//    }
+//
+//    public void setCreated(LocalDateTime created) {
+//        this.created = created;
+//    }
+//
+//    public String getModifiedBy() {
+//        return modifiedBy;
+//    }
+//
+//    public void setModifiedBy(String modifiedBy) {
+//        this.modifiedBy = modifiedBy;
+//    }
+
+    public LocalDateTime getModified() {
+        return modified;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public void setModified(LocalDateTime modified) {
+        this.modified = modified;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public LocalDateTime getCreated() {
@@ -145,33 +190,9 @@ public class Configuration {
         this.created = created;
     }
 
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @Override
     public String toString() {
-        return "Configuration{" +
+        return "Terminal{" +
                 "configId=" + configId +
                 ", serialNo='" + serialNo + '\'' +
                 ", merchantNo='" + merchantNo + '\'' +
@@ -181,9 +202,8 @@ public class Configuration {
                 ", merchantType='" + merchantType + '\'' +
                 ", terminalId='" + terminalId + '\'' +
                 ", terminalOwner='" + terminalOwner + '\'' +
-                ", createdBy='" + createdBy + '\'' +
+                ", userId='" + userId + '\'' +
                 ", created=" + created +
-                ", modifiedBy='" + modifiedBy + '\'' +
                 ", modified=" + modified +
                 '}';
     }

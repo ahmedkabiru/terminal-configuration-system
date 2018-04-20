@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	layout:decorator="layout/layout">
+
+<head>
+<title>Layout</title>
+</head>
+<body>
+	<div layout:fragment="content">
+<div class="card card-register mx-auto mt-5">
+      <div class="card-header">Terminal Details</div>
+      <div class="card-body">
+            <table class="table table-bordered table-hover table-striped">
+                <tr><td>Terminal Id</td>  <td data-th-text="${terminals.terminalId}">...</td></tr>
+                <tr><td>Serial No</td>  <td data-th-text="${terminals.serialNo}">...</td></tr>
+                <tr><td>Merchant Id</td>  <td data-th-text="${terminals.merchantNo}">...</td></tr>
+                <tr><td>Merchant Name</td>  <td data-th-text="${terminals.merchantName}">...</td></tr>
+                <tr><td>Merchant Address</td>  <td data-th-text="${terminals.merchantAddress}">...</td></tr>
+                <tr><td>Merchant Type</td>  <td data-th-text="${terminals.merchantType}">...</td></tr>
+                <tr><td>Merchant Phone</td>  <td data-th-text="${terminals.merchantPhone}">...</td></tr>
+                <tr><td>Date Created</td>  <td data-th-text="${terminals.created}">...</td></tr> 
+            </table>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+
+</div>
+</body>
+</html>

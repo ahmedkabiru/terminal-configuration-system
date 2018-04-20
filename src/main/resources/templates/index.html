@@ -1,10 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+    <!-- Bootstrap core CSS-->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin.css" rel="stylesheet">
 </head>
-<body>
-<h2>Login</h2>
+
+<body class="bg-dark">
+<div class="container">
+    <h2 style="text-align: center;color: white;">TERMINAL CONFIGURATION SYSTEM</h2>
+    <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+            <div class="alert alert-danger" role="alert" th:if="${param.error}">
+                Invalid username and secret.
+            </div>
+            <div class="alert alert-danger" role="alert" th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <!--<form class="form-signin" th:action="@{/index}" method="post">-->
+                <!--<h2 class="form-signin-heading">Please sign in</h2>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="username" class="sr-only">Username</label>-->
+                    <!--<input type="text" roleId="username" class="form-control" placeholder="Username" name="username"-->
+                           <!--id="username"-->
+                           <!--required="required" autofocus="autofocus"/>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="password" class="sr-only">Password</label>-->
+                    <!--<input type="password" roleId="inputPassword" class="form-control" placeholder="Password"-->
+                           <!--id="password"-->
+                           <!--name="password" required="required"/>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<input type="checkbox" name="remember-me" id="remember-me"/> &nbsp; Remember me-->
+                <!--</div>-->
+                <!--<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
+            <!--</form>-->
+
+            <!--<hr />-->
+
+            <!--<div class="form-group ">-->
+                <!--<a type="submit" class="btn btn-info btn-lg btn-block login-button" th:href="@{/register}">Sign up!</a>-->
+            <!--</div>-->
+            <form th:action="@{/index}" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Username</label>
+                    <input class="form-control" roleId="username" id="exampleInputEmail1" type="text" aria-describedby="emailHelp" name="username" placeholder="Enter Username" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input class="form-control" roleId="inputPassword" id="exampleInputPassword1" type="password"  name="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" name="remember-me" type="checkbox"> Remember Password</label>
+                    </div>
+                </div>
+                <button  type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <div class="text-center">
+                <a class="d-block small mt-3" href="register.html">Register an Account</a>
+                <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
+
 </html>

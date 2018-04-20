@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="layout/layout">
+
+<head>
+    <title>Layout</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li th:each="item, itemStat : ${breadcrumbs}" class="breadcrumb-item">
+        <a th:href="${item.link}" th:unless="${itemStat.last}" th:text="${item.linktext}">Home</a>
+        <span th:if="${itemStat.last}" th:text="${item.linktext}">Home</span>
+        </li>
+    </ol>
+    <span  th:if="${successMsg}"  th:text="${successMsg}">...</span>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i>Manage Terminal</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Serial No</th>
+                    <th>Terminal Id</th>
+                    <th>Merchant No</th>
+                    <th>Merchant Name</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="terminal,iterationStatus: ${terminals}">
+                    <td data-th-text="${iterationStatus.count}">1</td>
+                    <td data-th-text="${terminal.serialNo}">...</td>
+                    <td data-th-text="${terminal.terminalId}">...</td>
+                    <td data-th-text="${terminal.merchantNo}">...</td>
+                    <td data-th-text="${terminal.merchantName}">...</td>
+                    <td colspan="3"><a th:href="@{/terminal/view?id=}+${terminal.configId}">View</a> | <a th:href="@{/terminal/update?id=}+${terminal.configId}">Edit</a> | <a th:href="@{/terminal/delete?id=}+${terminal.configId}">Delete</a> </td>
+                    <!-- <td data-th-text="${savingsTransaction.availableBalance}">...</td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -11,24 +11,30 @@ public class UserRole {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userRoleId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id")
-    Role role;
 
     public UserRole(User user, Role role) {
         this.user = user;
         this.role = role;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private  Role role;
+
+
+    public UserRole() {
+    }
+
     public long getUserRoleId() {
         return userRoleId;
     }
 
-    public void setUserRoleId(Long userRoleId) {
+    public void setUserRoleId(long userRoleId) {
         this.userRoleId = userRoleId;
     }
 
